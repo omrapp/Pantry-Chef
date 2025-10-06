@@ -63,7 +63,7 @@ Ingredients: {{ingredients}}
 For each recipe, provide:
 - name
 - ingredients
-- instructions as a list of steps
+- instructions as an array of strings, with each string being a step in the recipe.
 - country of origin
 - a healthy rating of the dish
 - the approximate calories, proteins, fat, and carbs in the dish
