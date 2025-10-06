@@ -30,6 +30,12 @@ export function RecipeDetails({ recipe }: RecipeDetailsProps) {
       addFavorite(recipe);
     }
   };
+  
+  const instructionsList = Array.isArray(recipe.instructions)
+    ? recipe.instructions
+    : typeof recipe.instructions === 'string'
+    ? recipe.instructions.split('\n').filter(step => step.trim() !== '')
+    : [];
 
   return (
     <SheetContent className="sm:max-w-2xl w-full p-0">
@@ -100,7 +106,7 @@ export function RecipeDetails({ recipe }: RecipeDetailsProps) {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold font-headline">Instructions</h3>
             <ol className="list-decimal list-inside space-y-2 text-sm text-foreground">
-              {recipe.instructions.map((step, index) => (
+              {instructionsList.map((step, index) => (
                 <li key={index} className="pl-2">{step}</li>
               ))}
             </ol>
