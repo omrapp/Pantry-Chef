@@ -11,15 +11,32 @@ type IngredientInputProps = {
   isLoading: boolean;
 };
 
+const popularIngredients = [
+  "rice",
+  "pasta",
+  "garlic",
+  "onion",
+  "chicken",
+  "beef",
+  "tomatoes",
+  "cheese",
+  "potatoes",
+  "carrots",
+];
+
 export function IngredientInput({ onSearch, isLoading }: IngredientInputProps) {
   const [currentIngredient, setCurrentIngredient] = useState("");
   const [ingredients, setIngredients] = useState<string[]>([]);
 
-  const handleAddIngredient = () => {
-    if (currentIngredient.trim() && !ingredients.includes(currentIngredient.trim())) {
-      setIngredients([...ingredients, currentIngredient.trim()]);
-      setCurrentIngredient("");
+  const handleAddIngredient = (ingredient: string) => {
+    if (ingredient.trim() && !ingredients.includes(ingredient.trim())) {
+      setIngredients((prev) => [...prev, ingredient.trim()]);
     }
+  };
+  
+  const handleAddCurrentIngredient = () => {
+    handleAddIngredient(currentIngredient);
+    setCurrentIngredient("");
   };
 
   const handleRemoveIngredient = (ingredientToRemove: string) => {
@@ -29,7 +46,7 @@ export function IngredientInput({ onSearch, isLoading }: IngredientInputProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      handleAddIngredient();
+      handleAddCurrentIngredient();
     }
   };
 
@@ -37,6 +54,10 @@ export function IngredientInput({ onSearch, isLoading }: IngredientInputProps) {
     e.preventDefault();
     onSearch(ingredients);
   };
+
+  const availableSuggestions = popularIngredients.filter(
+    (popIngredient) => !ingredients.includes(popIngredient)
+  );
 
   return (
     <div className="w-full space-y-4 rounded-lg border bg-card p-4 shadow-sm">
@@ -52,7 +73,7 @@ export function IngredientInput({ onSearch, isLoading }: IngredientInputProps) {
           />
           <Button
             type="button"
-            onClick={handleAddIngredient}
+            onClick={handleAddCurrentIngredient}
             disabled={isLoading || !currentIngredient.trim()}
             variant="secondary"
           >
@@ -76,6 +97,25 @@ export function IngredientInput({ onSearch, isLoading }: IngredientInputProps) {
                 </button>
               </Badge>
             ))}
+          </div>
+        )}
+
+        {availableSuggestions.length > 0 && (
+          <div className="space-y-2">
+            <p className="text-sm text-muted-foreground">Or add a popular ingredient:</p>
+            <div className="flex flex-wrap gap-2">
+              {availableSuggestions.map((suggestion) => (
+                <button
+                  key={suggestion}
+                  type="button"
+                  onClick={() => handleAddIngredient(suggestion)}
+                  disabled={isLoading}
+                  className="text-sm border rounded-full px-3 py-1 hover:bg-accent hover:text-accent-foreground transition-colors disabled:opacity-50"
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
