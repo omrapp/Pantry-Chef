@@ -1,7 +1,7 @@
 export type Recipe = {
   name: string;
   ingredients: string;
-  instructions: string;
+  instructions: string[];
   countryOfOrigin: string;
   healthyRating: string;
   approximateCalories: number;

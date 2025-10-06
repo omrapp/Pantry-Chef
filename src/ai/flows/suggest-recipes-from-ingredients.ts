@@ -26,7 +26,7 @@ const SuggestRecipesFromIngredientsOutputSchema = z.object({
       z.object({
         name: z.string().describe('The name of the recipe.'),
         ingredients: z.string().describe('The list of ingredients required.'),
-        instructions: z.string().describe('The instructions to make the recipe.'),
+        instructions: z.array(z.string()).describe('The steps to make the recipe.'),
         countryOfOrigin: z.string().describe('The country of origin of the dish.'),
         healthyRating: z.string().describe('A healthy rating of the dish.'),
         approximateCalories: z.number().describe('The approximate calories in the dish.'),
@@ -63,7 +63,7 @@ Ingredients: {{ingredients}}
 For each recipe, provide:
 - name
 - ingredients
-- instructions
+- instructions as a list of steps
 - country of origin
 - a healthy rating of the dish
 - the approximate calories, proteins, fat, and carbs in the dish
@@ -72,7 +72,7 @@ For each recipe, provide:
 Make sure the photoDataUri is a valid data URI.
 
 Return the recipes in JSON format.
-`, 
+`,
 });
 
 const suggestRecipesFromIngredientsFlow = ai.defineFlow(

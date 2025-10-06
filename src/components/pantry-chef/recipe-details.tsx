@@ -99,9 +99,11 @@ export function RecipeDetails({ recipe }: RecipeDetailsProps) {
 
           <div className="space-y-4">
             <h3 className="text-xl font-semibold font-headline">Instructions</h3>
-            <div className="prose prose-sm max-w-none text-foreground whitespace-pre-line">
-              {recipe.instructions}
-            </div>
+            <ol className="list-decimal list-inside space-y-2 text-sm text-foreground">
+              {recipe.instructions.map((step, index) => (
+                <li key={index} className="pl-2">{step}</li>
+              ))}
+            </ol>
           </div>
         </div>
       </ScrollArea>
