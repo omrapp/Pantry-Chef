@@ -33,10 +33,10 @@ const SuggestRecipesFromIngredientsOutputSchema = z.object({
         proteins: z.number().describe('The approximate protein content in grams.'),
         fat: z.number().describe('The approximate fat content in grams.'),
         carbs: z.number().describe('The approximate carbohydrate content in grams.'),
-        photoDataUri: z
+        photoDataUrl: z
           .string()
           .describe(
-            "A photo of the recipe, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+            "A photo of the recipe, as URL of the image. It should be a valid data URL."
           ),
       })
     )
@@ -66,10 +66,8 @@ For each recipe, provide:
 - instructions as an array of strings, with each string being a step in the recipe.
 - country of origin
 - a healthy rating of the dish
-- the approximate calories, proteins, fat, and carbs in the dish
-- photoDataUri
-
-Make sure the photoDataUri is a valid data URI.
+- the approximate calories, proteins, fat, carbs, sugar and fiber in the dish
+- photoDataUrl  Make sure the photoDataUrl is a valid URL.
 
 Return the recipes in JSON format.
 `,

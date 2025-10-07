@@ -42,7 +42,7 @@ export function RecipeDetails({ recipe }: RecipeDetailsProps) {
       <ScrollArea className="h-full">
         <div className="relative h-64 md:h-80 w-full">
           <Image
-            src={recipe.photoDataUri}
+            src={recipe.photoDataUrl}
             alt={recipe.name}
             fill
             className="object-cover"

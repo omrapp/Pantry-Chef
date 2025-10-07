@@ -8,5 +8,5 @@ export type Recipe = {
   proteins: number;
   fat: number;
   carbs: number;
-  photoDataUri: string;
+  photoDataUrl: string;
 };

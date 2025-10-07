@@ -41,7 +41,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
             <div className="cursor-pointer">
               <div className="relative aspect-video w-full">
                 <Image
-                  src={recipe.photoDataUri}
+                  src={recipe.photoDataUrl}
                   alt={recipe.name}
                   fill
                   className="object-cover"

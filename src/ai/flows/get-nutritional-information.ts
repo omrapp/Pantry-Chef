@@ -41,7 +41,7 @@ const prompt = ai.definePrompt({
   output: {schema: NutritionalInformationOutputSchema},
   prompt: `You are an expert nutritionist providing detailed nutritional information about recipes.
 
-  Given the recipe name and ingredients, determine the country of origin, provide a healthy rating, and estimate the calories, protein, fat, and carbohydrate content.
+  Given the recipe name and ingredients, determine the country of origin, provide a healthy rating, and estimate the calories, protein, fat, suger, fiber and carbohydrate content.
   Respond in JSON format.
 
   Recipe Name: {{{recipeName}}}
